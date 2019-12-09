@@ -21,9 +21,9 @@ use PHPUnit\Framework\TestResult;
 /**
  * All tests related to database
  *
- * This is a PHPUnit 7+ wrapper.
+ * This is a PHPUnit 6 and below wrapper.
  */
-class DatabaseSuite extends TestSuite
+class DatabaseLegacySuite extends TestSuite
 {
     /**
      * Returns a suite containing all tests requiring a database connection,
@@ -33,10 +33,6 @@ class DatabaseSuite extends TestSuite
      */
     public static function suite()
     {
-        if (version_compare(PHP_VERSION, '7.0') < 1) {
-            return DatabaseLegacySuite::suite();
-        }
-
         $suite = new static('Database related tests');
         $suite->addTestFile(__DIR__ . DS . 'Database' . DS . 'ConnectionTest.php');
         $suite->addTestDirectoryRecursive(__DIR__ . DS . 'Database');
@@ -49,7 +45,7 @@ class DatabaseSuite extends TestSuite
      * @param bool $preferCache
      * @return int
      */
-    public function count($preferCache = false): int
+    public function count($preferCache = false)
     {
         return parent::count($preferCache) * 2;
     }
@@ -60,7 +56,7 @@ class DatabaseSuite extends TestSuite
      * @param \PHPUnit\Framework\TestResult $result
      * @return \PHPUnit\Framework\TestResult
      */
-    public function run(TestResult $result = null): TestResult
+    public function run(TestResult $result = null)
     {
         $permutations = [
             'Identifier Quoting' => function () {
