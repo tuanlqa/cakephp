@@ -22,7 +22,7 @@ if (!function_exists('urlArray')) {
      * Returns an array URL from a route path string.
      *
      * @param string $path Route path.
-     * @param array An array specifying any additional parameters.
+     * @param array $params An array specifying any additional parameters.
      *   Can be also any special parameters supported by `Router::url()`.
      * @return array URL
      * @see \Cake\Routing\Router::pathUrl()
